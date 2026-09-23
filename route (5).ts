@@ -1,0 +1,2 @@
+import {NextResponse} from 'next/server'; import {prisma} from '@/lib/prisma';
+export async function POST(req:Request,{params}:{params:Promise<{id:string}>}){const {id}=await params;const {body}=await req.json();const user=await prisma.user.findFirst();if(!user||!body)return NextResponse.json({error:'Missing user or comment'},{status:400});const comment=await prisma.comment.create({data:{body,buildId:id,authorId:user.id},include:{author:true}});return NextResponse.json(comment)}

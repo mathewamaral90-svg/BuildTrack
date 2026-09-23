@@ -1,0 +1,2 @@
+import {NextResponse} from 'next/server'; import {prisma} from '@/lib/prisma';
+export async function POST(req:Request){const {title,body,category}=await req.json();const user=await prisma.user.findFirst();if(!user)return NextResponse.json({error:'Run seed first'},{status:400});const post=await prisma.assistancePost.create({data:{title,body,category:category||'General',authorId:user.id}});return NextResponse.json(post)}

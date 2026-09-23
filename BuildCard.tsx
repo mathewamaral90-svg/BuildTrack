@@ -1,0 +1,3 @@
+import Link from "next/link";
+export function BuildCard({build}:{build:any}){return <Link href={`/builds/${build.id}`} className="card buildcard"><div className="cover"><span className="tag">{build.status}</span></div><div className="buildbody"><h3>{build.year} {build.make} {build.model}</h3><p className="muted small">{build.title}</p><div className="statrow small"><span>Build progress</span><strong>{build.progress}%</strong></div><div className="progress"><div style={{width:`${build.progress}%`}}/></div><div className="meta"><span className="tag">{build.parts?.length ?? 0} parts</span><span className="tag">{build.tasks?.filter((t:any)=>t.completed).length ?? 0} tasks done</span></div></div></Link>}
+}
